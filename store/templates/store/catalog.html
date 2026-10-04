@@ -1,0 +1,41 @@
+{% extends 'store/base.html' %}
+
+{% block title %}Available Mudhakkirat{% endblock %}
+
+{% block content %}
+    <h2 style="margin-bottom: 20px; color: #2e5339;">Available Mudhakkirat</h2>
+    <form method="GET" class="card" style="margin-bottom: 25px;">
+        <label>Level:</label>
+        <select name="level" style="padding: 8px; border-radius: 6px; border: 1px solid #ccc; width: 100%;">
+            <option value="">All</option>
+            <option value="raudha">Raudha</option>
+            <option value="primary_1">Primary 1</option>
+            <option value="primary_2">Primary 2</option>
+            <option value="primary_3">Primary 3</option>
+            <option value="primary_4">Primary 4</option>
+            <option value="primary_5">Primary 5</option>
+            <option value="primary_6">Primary 6</option>
+            <option value="secondary_1">Secondary 1</option>
+            <option value="secondary_2">Secondary 2</option>
+            <option value="secondary_3">Secondary 3</option>
+            <option value="secondary_4">Secondary 4</option>
+            <option value="secondary_5">Secondary 5</option>
+            <option value="secondary_6">Secondary 6</option>
+        </select>
+    
+        <label>Subject:</label>
+        <input type="text" name="subject" placeholder="e.g. Tafsir">
+    
+        <button type="submit" style="margin-top: 15px;">Filter</button>
+    </form>
+    {% for item in mudhakkirat %}
+        <div class="card">
+            <h3>{{ item.title }}</h3>
+            <p>Subject: {{ item.subject }}</p>
+            <p>Level: {{ item.level }}</p>
+            <p class="price">UGX {{ item.price }}</p>
+            <a href="{{ item.file.url }}" class="button">View Sample</a>
+            <a href="{% url 'order_create' item.id %}" class="button">Buy Now</a>
+        </div>
+    {% endfor %}
+{% endblock %}
